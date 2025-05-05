@@ -1,0 +1,152 @@
+<?php
+require "fonction_form.php";
+
+// TRAITEMENT DU FORMULAIRE
+// Initialisation des chaines de caractères
+$resultat = "";
+$erreur = "";
+
+// Initialisation des variables
+if (!empty($_POST["pseudo"]))
+    $pseudo = $_POST["pseudo"];
+else
+    $pseudo = '';
+
+if (!empty($_POST["email"]))
+    $email = $_POST["email"];
+else
+    $email = '';
+
+// Le résultat du traitement est enregistré dans $resultat
+if (isset($_POST["clic"]))    // Si le formulaire a été validé
+{
+    // Traitement du pseudo
+    if (empty($pseudo))
+        $erreur .= "Veuillez indiquer votre pseudo<br>";
+
+    // Traitement de l'email
+    if (!empty($_POST["email"])) {
+        $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
+        // Résultat : $email = "test@example.com" (valide)
+        if ($email === false) {
+            $erreur .= "L'adresse email n'est pas valide<br>";
+        }
+    } else {
+        $erreur .= "L'adresse email est obligatoire<br>";
+    }
+
+    if (empty($erreur)) {
+        // Vérifier si l'utilisateur existe dans la base de données
+        $verifie_utilisateur = "SELECT * FROM utilisateur WHERE pseudo = '$pseudo' AND email = '$email'";
+        $utilisateur = lectureBDD($verifie_utilisateur);
+
+        if (count($utilisateur) > 0) {
+            // Utilisateur trouvé
+            $resultat = "<div class='resultat'>Bienvenue <span>$pseudo</span> vous êtes maintenant connecté.</div>";
+        } else {
+            // Utilisateur non trouvé
+            $erreur .= "Identifiants incorrects. Vérifiez votre pseudo et email.";
+        }
+    }
+} else
+    $resultat = "<div class='resultat'>Veuillez compléter le formulaire</div>";
+
+//var_dump($_POST);
+?>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorillaz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="connexion.css?v=<?php echo time(); ?>">
+</head>
+
+<body>
+    <header>
+        <div class="gorillazlog">
+            <a href="../../index.php">
+                <img src="../../img/gorillaz.logo_.white_.png" alt="Logo Gorillaz">
+            </a>
+        </div>
+        <div class="flexnav">
+            <a href="../../Page/page.php" class="discographie nav">DISCOGRAPHIE</a>
+        </div>
+        <div class="flexnav">
+            <a href="https://www.gorillaz.com/" target="_blank" class="a nav">SITE OFFICIEL</a>
+        </div>
+        <div class="flexnav">
+            <a href="https://www.instagram.com/gorillaz/?hl=en" class="subscribe nav" target="_blank">FOLLOW
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
+                    <path
+                        d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+
+
+
+        <div class="inscription">
+            <a href="./Page/signup.php" class="a-inscr">SIGN UP
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
+                    <circle cx="12" cy="10" r="3" />
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+            </a>
+            <div class="dropdown-content">
+                <a href="./signup.php">S'inscrir</a>
+                <a href="./connexion.php">Se connecter</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Pseudo:</label>
+                <input type="text" class="form-control" id="pseudo" placeholder="Entrez votre pseudo" name="pseudo" value="<?= $pseudo ?>">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="michel@notmail.com" name="email" value="<?= $email ?>">
+            </div>
+            <button type="submit" class="btn btn-primary" name="clic" value="ok">Se connecter</button>
+        </form>
+    </div>
+    <?php
+    if (empty($erreur))
+        echo $resultat;
+    else
+        echo "<div class='erreur'>$erreur</div>";
+    ?>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        // Empêche la resoumission à l'actualisation
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</body>
+
+</html>

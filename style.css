@@ -1,0 +1,368 @@
+body {
+    margin: 0;
+    min-height: 150vh;
+    background-image: url(./img/gorillaz-xwau0n7ogqggnba5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+.backvideo {
+    position: fixed;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: black;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+}
+
+.logostart {
+    z-index: 4;
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    width: 40%;
+    height: 50%;
+    cursor: pointer;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+    width: fit-content;
+    height: fit-content;
+}
+
+.logostart:hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+}
+
+.logostart.invisble {
+    opacity: 0;
+}
+
+#logostart {
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+    display: block;
+    text-decoration: none;
+}
+
+#logstart img {
+    width: 100%;
+    height: auto;
+}
+
+/* Conteneur de la vidéo pour qu'elle occupe tout l'écran */
+#player-container {
+    z-index: 3;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: #000;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.2);
+}
+
+#player {
+    pointer-events: auto;
+}
+
+#player.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Fin de la partie vidéo */
+
+
+
+
+.backopacity {
+    min-height: 150vh;
+    background-color: rgb(37, 36, 36, 0.6);
+}
+
+
+
+
+/* Le header contenant les différents liens et le logo*/
+
+
+header {
+    position: fixed;
+    width: 80%;
+    left: 180px;
+    z-index: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: 650;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 50px;
+    text-shadow: 0px 3px 3px rgb(40, 40, 40);
+}
+
+.gorillazlog>a>img {
+    width: 100%;
+    height: auto;
+}
+
+.gorillazlog {
+    position: fixed;
+    top: 15px;
+    left: 200px;
+    height: auto;
+    width: 300px;
+    text-decoration: none;
+}
+
+header>div>a {
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.nav:hover {
+    background-color: whitesmoke;
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+    color: rgb(22, 22, 22);
+    text-shadow: none;
+}
+
+header>a:nth-child(4)>svg {
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+.discographie {
+    padding: 1Opx;
+}
+
+.subscribe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.centrer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+/* Menu déroulant */
+.inscription {
+    position: relative;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(223, 152, 90);
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.inscription>a {
+    text-decoration: none;
+    color: rgb(22, 22, 22);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inscription>.a-inscr:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #4c67b9;
+    min-width: 130px;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    text-decoration: none;
+    display: block;
+}
+
+.inscription:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s; 
+}
+
+.dropdown-content a:hover {
+    background-color: #474141;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+
+
+
+
+
+
+
+/* Partie contenant les membres du groupe et les informations sur eux*/
+main {
+    position: relative;
+    top: 200px;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+main>h1 {
+    background-color: #e1536f;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px black;
+}
+
+.member-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.arrow {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    color: white;
+}
+
+.member-card {
+    flex-grow: 1;
+}
+
+.member-card img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.member-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.member-tab {
+    padding: 8px 16px;
+    height: fit-content;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.member-tab.active {
+    background: #e1536f;
+    color: white;
+}
+
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.member-content {
+    transition: opacity 0.3s ease;
+    color: white;
+}
+
+.member-content:not(.hidden) {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+/* Partie contenant les informations sur les concerts, EPs, albums et autres*/
+
+.containinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px;
+    margin-top: 100px;
+    width: 100%;
+    height: 70%;
+}
+
+.contain {
+    margin: 10px;
+    margin-top: 100px;
+    width: 50%;
+    height: 70%;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgb(76, 103, 185, 0.9);
+    box-shadow: 0px 0px 10px black;
+}
+
+.contain>h3 {
+    color: rgb(238, 147, 95);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.txtinf {
+    color: rgb(255, 255, 255);
+}

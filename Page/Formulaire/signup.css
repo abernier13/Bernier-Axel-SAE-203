@@ -1,0 +1,197 @@
+body{
+    min-height: 120vh;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    background-image: url(../../img/papers.co-ab05-wallpaper-gorillaz-boat-illust-music-36-3840x2400-4k-wallpaper.jpg);
+    background-position: top;
+}
+
+/* Le header contenant les différents liens et le logo*/
+
+
+header {
+    position: fixed;
+    width: 80%;
+    left: 180px;
+    z-index: 1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+    font-weight: 650;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 50px;
+    text-shadow: 0px 3px 3px rgb(40, 40, 40);
+}
+
+.gorillazlog>a>img {
+    width: 100%;
+    height: auto;
+}
+
+.gorillazlog {
+    position: fixed;
+    top: 15px;
+    left: 200px;
+    height: auto;
+    width: 300px;
+    text-decoration: none;
+}
+
+header>div>a {
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.nav:hover {
+    background-color: whitesmoke;
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+    color: rgb(22, 22, 22);
+    text-shadow: none;
+}
+
+header>a:nth-child(4)>svg {
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+.discographie {
+    padding: 1Opx;
+}
+
+.subscribe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.centrer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+/* Menu déroulant */
+.inscription {
+    position: relative;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(223, 152, 90);
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.inscription>a {
+    text-decoration: none;
+    color: rgb(22, 22, 22);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inscription>.a-inscr:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #4c67b9;
+    min-width: 130px;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    text-decoration: none;
+    display: block;
+}
+
+.inscription:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s; 
+}
+
+.dropdown-content a:hover {
+    background-color: #474141;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+
+
+
+
+/*Le formulaire*/
+.flex{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+form{
+    position: relative;
+    background-color: rgb(80, 101, 241,0.8);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.btn.btn-primary {
+    background-color: rgb(223, 152, 90);
+    border-color: white;
+    color: black;
+  }
+
+  .resultat{
+    position: absolute;
+    left: 43%;
+    bottom: 15%;
+    background-color: #474141;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 6px;
+  }
+
+  .resultat>span{
+    font-weight: 700;
+    color: rgb(231, 201, 29);
+  }
+
+  .erreur{
+    position: absolute;
+    left: 43%;
+    bottom: 5%;
+    background-color: #c42020;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 6px;
+  }
