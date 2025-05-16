@@ -64,7 +64,7 @@
                     </svg>
                 </a>
                 <div class="dropdown-content">
-                    <a href="./Page/Formulaire/signup.php">S'inscrir</a>
+                    <a href="./Page/Formulaire/signup.php">S'inscrire</a>
                     <a href="./Page/Formulaire/connexion.php">Se connecter</a>
                 </div>
             </div>
@@ -155,6 +155,17 @@
     <script src="js/videostart.js"></script>
     <script src="js/session.js"></script>
     <script src="js/perso.js"></script>
+
+    <script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 50) { // Se déclenche après 50px de scroll
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -105,8 +105,8 @@ if (isset($_POST["clic"])) {
 
     if (empty($erreur)) {
         // Nettoyage des entrées
-        $pseudo_clean = addslashes($pseudo);
-        $comm_clean = addslashes($comm);
+        $pseudo_clean = $pseudo;
+        $comm_clean = $comm;
         $id_album = intval($albums);
         $note_clean = intval($note);
 
