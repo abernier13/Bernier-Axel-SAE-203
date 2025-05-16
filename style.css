@@ -11,6 +11,9 @@ body {
 
 .backvideo {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 2;
     height: 100%;
     width: 100%;
@@ -23,8 +26,9 @@ body {
 .logostart {
     z-index: 4;
     position: fixed;
-    top: 40%;
-    left: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40%;
     height: 50%;
     cursor: pointer;
@@ -84,8 +88,6 @@ body {
 /* Fin de la partie vidéo */
 
 
-
-
 .backopacity {
     min-height: 150vh;
     background-color: rgb(37, 36, 36, 0.6);
@@ -122,8 +124,8 @@ header {
 
 .gorillazlog {
     position: fixed;
-    top: 15px;
-    left: 200px;
+    top: 30px;
+    left: 300px;
     height: auto;
     width: 300px;
     text-decoration: none;
@@ -144,9 +146,9 @@ header>div>a {
     text-shadow: none;
 }
 
-header>a:nth-child(4)>svg {
-    background-color: whitesmoke;
-    border-radius: 10px;
+.flexnav:hover svg path {
+    fill: black;
+    transition: fill 0.3s ease; 
 }
 
 .discographie {
@@ -223,7 +225,7 @@ header>a:nth-child(4)>svg {
     display: block;
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.1s; 
+    transition-delay: 0.1s;
 }
 
 .dropdown-content a:hover {
@@ -328,41 +330,120 @@ main>h1 {
 
 
 
-/* Partie contenant les informations sur les concerts, EPs, albums et autres*/
+/* Partie contenant les covers d'albums - Version améliorée */
 
 .containinfo {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-left: 100px;
+    padding: 2rem;
+    margin-top: 200px;
+    padding-top: 80px;
+    position: relative;
+}
+
+.containinfo h3 {
+    position: absolute;
+    top: -10px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4c67b9, 0 0 20px #4c67b9;
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon-glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4c67b9, 0 0 20px #4c67b9;
+    }
+
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4c67b9, 0 0 40px #4c67b9;
+    }
+}
+
+/* Animation au survol */
+.containinfo h3:hover {
+    text-shadow: 0 5px 15px rgba(76, 103, 185, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containinfo h3 {
+        font-size: 2rem;
+        top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containinfo h3 {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
 }
 
 .info {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px;
-    margin-top: 100px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
     width: 100%;
-    height: 70%;
+    max-width: 1200px;
 }
 
 .contain {
-    margin: 10px;
-    margin-top: 100px;
-    width: 50%;
-    height: 70%;
-    padding: 30px;
-    border-radius: 10px;
-    background-color: rgb(76, 103, 185, 0.9);
-    box-shadow: 0px 0px 10px black;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    aspect-ratio: 1/1;
+    /* Garde un ratio carré */
 }
 
-.contain>h3 {
-    color: rgb(238, 147, 95);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.contain:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 
-.txtinf {
-    color: rgb(255, 255, 255);
+.contain img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.contain:hover img {
+    transform: scale(1.05);
+}
+
+/* Effet de superposition au survol */
+.contain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 103, 185, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contain:hover::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .containinfo {
+        padding: 1rem;
+    }
 }

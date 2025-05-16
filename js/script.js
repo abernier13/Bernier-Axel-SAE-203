@@ -28,12 +28,12 @@ if (musique[albumSpecifique]) {
     `;
 } else {
     console.log("L'album spécifié n'existe pas dans l'objet musique.");
-}
+}*/
 
 
 
 
-// Initialisation de l'album spécifique à afficher
+//Initialisation de l'album spécifique à afficher
 let albumSpecifique = "Album1";
 let listesong = "";
 
@@ -68,4 +68,4 @@ if (musique[albumSpecifique]) {
 } else {
     console.log("L'album spécifié n'existe pas dans l'objet musique.");
 }
-*/
+

@@ -32,7 +32,6 @@ else
 if (isset($_POST["clic"]))    // Si le formulaire a été validé
 {
     // Traitement de la civilité
-    echo "<div class='erreur'>";
     if (empty($nom))
         $erreur .= "Veuillez indiquer votre nom<br>";
 
@@ -59,10 +58,8 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
         $verif_incr = lectureBDD($verif_incr);
 
         if ($verif_incr[0]['COUNT(*)'] > 0) {
-            $erreur = "Ce pseudo ou cet email est déjà utilisé.<br>Veuillez en choisir un autre.<br>";
-        } 
-        
-        else {
+            $erreur .= "Ce pseudo ou cet email est déjà utilisé.<br>Veuillez en choisir un autre.<br>";
+        } else {
             // Si le pseudo et l'email sont uniques, procéder à l'insertion
             $requete = "INSERT INTO utilisateur (nom, prenom, pseudo, email) VALUES ('$nom', '$prenom', '$pseudo', '$email')";
             $nb_ecriture = ecritureBDD($requete);
@@ -70,13 +67,11 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
             if ($nb_ecriture == 1) {
                 $resultat = "<div class='resultat'>Bienvenue <span>$pseudo</span>, vous êtes maintenant enregistré sur notre site.</div>";
             } else {
-                $erreur = "<div class='erreur'>Échec lors de l'enregistrement de votre compte.</div>";
+                $erreur .= "Échec lors de l'enregistrement de votre compte.";
             }
         }
     }
-     echo "</div>";
-}
-else
+} else
     $resultat = "<div class='resultat'>Veuillez compléter le formulaire</div>";
 
 //var_dump($_POST);
@@ -112,7 +107,7 @@ else
             <a href="https://www.instagram.com/gorillaz/?hl=en" class="subscribe nav" target="_blank">FOLLOW
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
                     <path
-                        d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z">
+                        fill="white" d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z">
                     </path>
                 </svg>
             </a>
@@ -171,6 +166,8 @@ else
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous">
     </script>
+
+    <script src="../../js/form.js"></script>
 
     <script>
         // Empêche la resoumission à l'actualisation

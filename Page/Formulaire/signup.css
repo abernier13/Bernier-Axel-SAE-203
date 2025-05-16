@@ -1,5 +1,5 @@
 body{
-    min-height: 120vh;
+    min-height: 100vh;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
@@ -8,7 +8,6 @@ body{
 }
 
 /* Le header contenant les différents liens et le logo*/
-
 
 header {
     position: fixed;
@@ -35,8 +34,8 @@ header {
 
 .gorillazlog {
     position: fixed;
-    top: 15px;
-    left: 200px;
+    top: 30px;
+    left: 300px;
     height: auto;
     width: 300px;
     text-decoration: none;
@@ -57,9 +56,9 @@ header>div>a {
     text-shadow: none;
 }
 
-header>a:nth-child(4)>svg {
-    background-color: whitesmoke;
-    border-radius: 10px;
+.flexnav:hover svg path {
+    fill: black;
+    transition: fill 0.3s ease; 
 }
 
 .discographie {
@@ -136,7 +135,7 @@ header>a:nth-child(4)>svg {
     display: block;
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.1s; 
+    transition-delay: 0.1s;
 }
 
 .dropdown-content a:hover {
@@ -144,6 +143,7 @@ header>a:nth-child(4)>svg {
     border-radius: 5px;
     transition: background-color 0.2s;
 }
+
 
 
 
@@ -174,7 +174,7 @@ form{
   .resultat{
     position: absolute;
     left: 43%;
-    bottom: 15%;
+    bottom: 25%;
     background-color: #474141;
     width: fit-content;
     padding: 15px;
@@ -186,12 +186,66 @@ form{
     color: rgb(231, 201, 29);
   }
 
-  .erreur{
-    position: absolute;
-    left: 43%;
-    bottom: 5%;
-    background-color: #c42020;
-    width: fit-content;
-    padding: 15px;
-    border-radius: 6px;
-  }
+  .resultat, .erreur {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultat {
+    bottom: 30px;
+    background-color: #4CAF50; /* Vert pour succès */
+    color: white;
+}
+
+.erreur {
+    bottom: 30px;
+    background-color: #f44336; /* Rouge pour erreur */
+    color: white;
+}
+
+.resultat>span {
+    font-weight: 700;
+    color: #FFEB3B; /* Jaune pour le pseudo */
+    margin: 0 5px;
+}
+
+/* Animation pour l'apparition des messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Bouton de fermeture pour les messages */
+.close-message {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-message:hover {
+    color: black;
+}

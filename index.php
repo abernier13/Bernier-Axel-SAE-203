@@ -46,7 +46,7 @@
                 <a href="https://www.instagram.com/gorillaz/?hl=en" class="subscribe nav" target="_blank">FOLLOW
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
                         <path
-                            d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z">
+                            fill="white" d="M 16 3 C 8.83 3 3 8.83 3 16 L 3 34 C 3 41.17 8.83 47 16 47 L 34 47 C 41.17 47 47 41.17 47 34 L 47 16 C 47 8.83 41.17 3 34 3 L 16 3 z M 37 11 C 38.1 11 39 11.9 39 13 C 39 14.1 38.1 15 37 15 C 35.9 15 35 14.1 35 13 C 35 11.9 35.9 11 37 11 z M 25 14 C 31.07 14 36 18.93 36 25 C 36 31.07 31.07 36 25 36 C 18.93 36 14 31.07 14 25 C 14 18.93 18.93 14 25 14 z M 25 16 C 20.04 16 16 20.04 16 25 C 16 29.96 20.04 34 25 34 C 29.96 34 34 29.96 34 25 C 34 20.04 29.96 16 25 16 z">
                         </path>
                     </svg>
                 </a>
@@ -123,32 +123,25 @@
         <br>
 
         <div class="containinfo">
+            <h3>Albums</h3>
             <div class="info">
                 <div class="contain">
-                    <h3>Concert</h3>
-                    <p class="txtinf">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta harum
-                        consectetur
-                        deserunt facilis nostrum maxime incidunt quibusdam vitae molestiae corrupti sit vero,
-                        numquam
-                        ullam
-                        nam quas dolor, assumenda fugiat quos.</p>
+                    <img src="./img/albums/0724353448806.jpg" alt="">
                 </div>
                 <div class="contain">
-                    <h3>Events</h3>
-                    <p class="txtinf">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, veniam
-                        atque
-                        nulla
-                        id culpa reiciendis numquam adipisci praesentium nihil rerum totam ipsum assumenda quo
-                        blanditiis
-                        doloribus eligendi, officiis corrupti repellendus.</p>
+                    <img src="./img/albums/0x1900-000000-80-0-0.jpg" alt="">
                 </div>
                 <div class="contain">
-                    <h3>Nouvel EP</h3>
-                    <p class="txtinf">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis
-                        exercitationem,
-                        temporibus unde nihil aspernatur modi facilis error nostrum obcaecati, asperiores deserunt
-                        suscipit
-                        rem blanditiis maxime! Aspernatur culpa exercitationem autem laudantium.</p>
+                    <img src="./img/albums/550x554.jpg" alt="">
+                </div>
+                <div class="contain">
+                    <img src="./img/albums/71M8yXz6o7L._UF1000,1000_QL80_.jpg" alt="">
+                </div>
+                <div class="contain">
+                    <img src="./img/albums/GorillazCrackerIsland.jpg" alt="">
+                </div>
+                <div class="contain">
+                    <img src="./img/albums/humanz.webp" alt="">
                 </div>
             </div>
         </div>

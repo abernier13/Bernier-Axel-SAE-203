@@ -1,15 +1,19 @@
-body{
-    min-height: 120vh;
+body {
+    min-height: 100vh;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-image: url(../img/4K-Gorillaz-Wallpaper-HD.jpg);
     background-position: center;
     background-size: 80%;
+    color: white;
 }
 
+.backopacity {
+    min-height: 100vh;
+    background-color: rgba(14, 14, 14, 0.5);
+}
 
 /* Le header contenant les différents liens et le logo*/
-
 
 header {
     position: fixed;
@@ -36,8 +40,8 @@ header {
 
 .gorillazlog {
     position: fixed;
-    top: 15px;
-    left: 200px;
+    top: 30px;
+    left: 300px;
     height: auto;
     width: 300px;
     text-decoration: none;
@@ -58,9 +62,9 @@ header>div>a {
     text-shadow: none;
 }
 
-header>a:nth-child(4)>svg {
-    background-color: whitesmoke;
-    border-radius: 10px;
+.flexnav:hover svg path {
+    fill: black;
+    transition: fill 0.3s ease;
 }
 
 .discographie {
@@ -137,7 +141,7 @@ header>a:nth-child(4)>svg {
     display: block;
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.1s; 
+    transition-delay: 0.1s;
 }
 
 .dropdown-content a:hover {
@@ -150,43 +154,117 @@ header>a:nth-child(4)>svg {
 
 
 
+/* Partie contenant le selecteur entre albums et titres */
+
+.nav-selector {
+    display: flex;
+    justify-content: left;
+    margin-left: 30px;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+
+
+/*Partie contenant les détails sur les albums*/
+.albums-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 120px 20px 20px;
+    justify-content: center;
+}
+
+.album-card {
+    background-color: rgba(15, 15, 15, 0.7);
+    border-radius: 15px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.album-card:hover {
+    transform: scale(1.05);
+}
+
+.album-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.bouton {
+    display: inline-block;
+    background-color: #4c67b9;
+    color: white;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.bouton:hover {
+    background-color: #3a4f8c;
+}
+
+
+
+
 
 
 /* Partie contenant les lecteurs audio */
-a{
+main {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.main-flex {
+    background-color: rgb(16, 16, 16, 0.8);
+    padding: 30px;
+    margin-top: 10%;
+}
+
+a {
     text-decoration: none;
     color: white;
 }
 
-.song{
+.song {
     margin: 5%;
-    background-color: rgb(15, 15, 15,0.5);
+    background-color: rgb(15, 15, 15, 0.5);
     border-radius: 20px;
     color: white;
     width: 50%;
 }
-.div-song{
+
+.div-song {
     display: flex;
     align-items: center;
     padding: 10px;
     margin: 20px;
 }
 
-.div-album{
+.div-album {
     margin: 20px;
     padding: 10px;
     font-size: x-large;
     width: fit-content;
 }
 
-.div-album:hover{
+.div-album:hover {
     background-color: rgb(59, 5, 125);
     border-radius: 10px;
     transform: scale(1.3);
     transition-duration: 0.3s;
 }
 
-.link-album{
+.link-album {
     text-decoration: none;
     color: white;
     padding: 20px;
@@ -194,26 +272,31 @@ a{
 }
 
 
-.div-song{
+.div-song {
     padding: 10px;
     width: fit-content;
 }
 
-.lien{
+.div-song>a:hover {
+    color: rgb(73, 250, 73);
+    background-color: rgba(85, 85, 85);
+}
+
+.lien {
     text-decoration: none;
     color: white;
     padding: 10px;
     margin: 10px;
 }
 
-.div-song:hover{
+.div-song:hover {
     background-color: rgb(91, 34, 8);
     border-radius: 10px;
     transform: scale(1.3);
     transition-duration: 0.3s;
 }
 
-.style{
+.style {
     margin: 20px;
     padding: 10px;
     font-size: larger;
@@ -224,14 +307,118 @@ a{
 
 
 /* Partie contenant le footer */
-footer{
+footer {
     display: flex;
-    align-items: end;
-    margin-top: 50px;
-    justify-content: space-between;
+    min-height: 50vh;
+    align-items: center;
+    justify-content: center;
 }
 
-.acceuil{
+form {
+    margin: 10px;
+    background-color: rgb(80, 101, 241,0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.btn.btn-primary {
+    background-color: rgb(223, 152, 90);
+    border-color: white;
+    color: black;
+}
+
+.btn.btn-primary:hover {
+    background-color: rgb(223, 152, 90, 0.9);
+
+}
+
+.resultat {
+    position: absolute;
+    left: 43%;
+    bottom: 25%;
+    background-color: #474141;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.resultat>span {
+    font-weight: 700;
+    color: rgb(231, 201, 29);
+}
+
+.resultat,
+.erreur {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultat {
+    bottom: 30px;
+    background-color: #4CAF50;
+    /* Vert pour succès */
+    color: white;
+}
+
+.erreur {
+    bottom: 30px;
+    background-color: #f44336;
+    /* Rouge pour erreur */
+    color: white;
+}
+
+.resultat>span {
+    font-weight: 700;
+    color: #FFEB3B;
+    /* Jaune pour le pseudo */
+    margin: 0 5px;
+}
+
+/* Animation pour l'apparition des messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+
+
+/* Bouton de fermeture pour les messages */
+.close-message {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-message:hover {
+    color: black;
+}
+
+.acceuil {
     margin: 20px;
     text-decoration: none;
     font-size: larger;
@@ -240,14 +427,16 @@ footer{
     border-radius: 10px;
 }
 
-.acceuil:hover{
+.acceuil:hover {
     transform: scale(1.2);
     transition-duration: 0.3s;
     background-color: rgb(91, 34, 8);
     text-decoration: underline;
 }
 
-.cerclesvg{
+.cerclesvg {
+    position: relative;
+    left: 30%;
     margin: 15px;
     margin-right: 20px;
     padding: 10px;
@@ -255,13 +444,13 @@ footer{
     border: 2px solid rgb(255, 255, 255)
 }
 
-.cerclesvg:hover{
+.cerclesvg:hover {
     background-color: rgb(91, 34, 8);
     transform: scale(1.3);
     transition-duration: 0.3s;
     transition-delay: 0.1s;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }

@@ -36,13 +36,13 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
     }
 
     if (empty($erreur)) {
-        // Vérifier si l'utilisateur existe dans la base de données
-        $verifie_utilisateur = "SELECT * FROM utilisateur WHERE pseudo = '$pseudo' AND email = '$email'";
+        // Vérifie si l'utilisateur existe dans la base de données
+        $verifie_utilisateur = "SELECT pseudo FROM utilisateur WHERE pseudo = '$pseudo' AND email = '$email'";
         $utilisateur = lectureBDD($verifie_utilisateur);
 
         if (count($utilisateur) > 0) {
             // Utilisateur trouvé
-            $resultat = "<div class='resultat'>Bienvenue <span>$pseudo</span> vous êtes maintenant connecté.</div>";
+            $resultat = "<div class='resultat'>Bienvenue <span>$pseudo</span> Vous êtes maintenant connecté.</div>";
         } else {
             // Utilisateur non trouvé
             $erreur .= "Identifiants incorrects. Vérifiez votre pseudo et email.";
