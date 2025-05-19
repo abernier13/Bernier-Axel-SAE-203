@@ -1,6 +1,6 @@
 <?php
 $menu = "<a class='lien' href='controleur.php?liste=albums'>Albums</a>
-<a class='lien' href='controleur.php?liste=musiques'>Musiques</a>";
+<a class='lien' href='controleur.php?liste=musiques'>Titres</a>";
 
 if (!isset($liste)) $liste = 'albums';
 if (!isset($table)) $table = [];
@@ -121,13 +121,13 @@ if (isset($_POST["clic"])) {
 
     if (empty($erreur)) {
         // Nettoyage des entrées
-        $pseudo_clean = $pseudo;
-        $comm_clean = $comm;
+        $pseudo = addslashes(trim($pseudo));
+        $comm = addslashes(trim($comm));
         $id_album = intval($albums);
-        $note_clean = intval($note);
+        $note = intval($note);
 
         // Vérifie si l'utilisateur existe
-        $verifie_utilisateur = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '$pseudo_clean'";
+        $verifie_utilisateur = "SELECT id_utilisateur FROM utilisateur WHERE pseudo = '$pseudo'";
         $utilisateur = lectureBDD($verifie_utilisateur);
 
         if (empty($utilisateur)) {
@@ -153,7 +153,7 @@ if (isset($_POST["clic"])) {
                 } else {
                     // Insertion du commentaire avec la note
                     $ajout_commentaire = "INSERT INTO avis (id_utilisateur, id_album, pseudo, note, commentaire, date_publication) 
-                                  VALUES ($id_utilisateur, $id_album, '$pseudo_clean', $note_clean, '$comm_clean', NOW())";
+                                  VALUES ($id_utilisateur, $id_album, '$pseudo', $note, '$comm', NOW())";
 
                     if (ecritureBDD($ajout_commentaire)) {
                         $resultat = "<div class='resultat'>Merci pour votre note de $note/5 et votre commentaire sur $nom_album. <span>" . $pseudo . "</span> !</div>";
