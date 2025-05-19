@@ -131,9 +131,9 @@ header.scrolled {
 .gorillazlog {
     position: absolute;
     left: 15%;
-    top: 90%;
+    top: 80%;
     transform: translateY(-50%);
-    width: 300px;
+    width: 250px;
     /* Taille réduite pour mobile */
     z-index: 10;
     /* Au-dessus du header */

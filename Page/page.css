@@ -17,34 +17,60 @@ body {
 
 header {
     position: fixed;
-    width: 80%;
-    left: 180px;
+    width: 100%;
+    top: 0;
+    left: 0;
     z-index: 1;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
-    font-weight: 650;
+    font-weight: 600;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: end;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    gap: 50px;
-    text-shadow: 0px 3px 3px rgb(40, 40, 40);
+    padding: 15px 5%;
+    gap: 20px;
+    background: transparent;
+    /* Fond transparent par défaut */
+    transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 
-.gorillazlog>a>img {
+/* Style du header quand on scroll */
+header.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    /* Fond noir semi-transparent */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    /* Effet de flou (optionnel) */
+}
+
+/* Logo Gorillaz - Fixe à gauche */
+.gorillazlog {
+    position: absolute;
+    left: 15%;
+    top: 80%;
+    transform: translateY(-50%);
+    width: 250px;
+    /* Taille réduite pour mobile */
+    z-index: 10;
+    /* Au-dessus du header */
+}
+
+.gorillazlog img {
     width: 100%;
     height: auto;
+    transition: transform 0.3s ease;
 }
 
-.gorillazlog {
-    position: fixed;
-    top: 30px;
-    left: 300px;
-    height: auto;
-    width: 300px;
-    text-decoration: none;
+.gorillazlog:hover img {
+    transform: scale(1.05);
+    /* Légère animation au survol */
+}
+
+/* Conteneur des liens de navigation */
+.nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 header>div>a {
@@ -85,6 +111,56 @@ header>div>a {
     gap: 10px;
 }
 
+/* Responsive */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 3%;
+        justify-content: space-between;
+    }
+
+    .gorillazlog {
+        width: 120px;
+        left: 15px;
+    }
+
+    .nav-container {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Cache certains éléments en mobile */
+    .discographie,
+    .a {
+        display: none;
+    }
+
+    .gorillazlog {
+        width: 160px;
+    }
+
+    .subscribe {
+        font-size: 0;
+        /* Cache le texte "FOLLOW" */
+    }
+
+    .subscribe svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gorillazlog {
+        width: 100px;
+    }
+
+    .inscription .a-inscr {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+}
 
 
 /* Menu déroulant */
@@ -316,7 +392,7 @@ footer {
 
 form {
     margin: 10px;
-    background-color: rgb(80, 101, 241,0.8);
+    background-color: rgb(80, 101, 241, 0.8);
     padding: 20px;
     border-radius: 10px;
 }
@@ -436,32 +512,33 @@ form {
 
 .cerclesvg {
     position: relative;
-    display: inline-flex; 
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    right: 150%;
+    right: 50%;
+    top: 150px;
     margin: 15px;
     padding: 10px;
-    width: 50px; 
-    height: 50px; 
-    border-radius: 50%; 
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     border: 2px solid rgb(255, 255, 255);
-    cursor: pointer; 
-    transition: all 0.3s ease; 
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .cerclesvg:hover {
     background-color: rgb(91, 34, 8);
-    transform: scale(1.1); 
+    transform: scale(1.1);
 }
 
 .white-icon {
-    width: 24px; 
+    width: 24px;
     height: 24px;
 }
 
 .white-icon path {
-    stroke: white; 
+    stroke: white;
 }
 
 html {

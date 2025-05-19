@@ -1,5 +1,4 @@
 <?php
-require_once("modele_musiques.php");
 $menu = "<a class='lien' href='controleur.php?liste=albums'>Albums</a>
 <a class='lien' href='controleur.php?liste=musiques'>Musiques</a>";
 
@@ -21,7 +20,7 @@ if ($liste == "albums") {
                 <h4>{$album['nom']}</h4>
                 <p>Année: {$album['annee']}</p>
                 <p>Description: {$album['description']}</p>
-                <a href='{$album['spotify_url']}' class='bouton'>Écouter</a>
+                <a href='{$album['spotify_url']}' class='bouton' target='_blank'>Écouter</a>
                 <a href='?liste=musiques&album={$album['id_album']}' class='bouton'>Voir les titres</a>
             </div>";
         }
@@ -31,31 +30,29 @@ if ($liste == "albums") {
     $contenu .= "</div>";
 } elseif ($liste == "musiques") {
     $titre = "<h3>Liste des titres</h3>";
-    $albumId = isset($_GET['album']) ? intval($_GET['album']) : 0;
+    $idAlbum = isset($_GET['album']) ? intval($_GET['album']) : 0;
 
-    if ($albumId > 0) {
+    if ($idAlbum > 0) {
         try {
             $options = [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"];
-            $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
+            $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', 'root', $options);
 
-            // Requête pour obtenir les infos de l'album
-            $reqAlbum = $bdd->prepare("SELECT nom, spotify_url FROM albums WHERE id_album = ?");
-            $reqAlbum->execute([$albumId]);
+            // Requête pour obtenir les infos de l'album 
+            $reqAlbum = $bdd->query("SELECT nom, spotify_url FROM albums WHERE id_album = " . intval($idAlbum));
             $albumInfo = $reqAlbum->fetch(PDO::FETCH_ASSOC);
 
-            // Requête pour récupérer les musiques de l'album
-            $reqMusiques = $bdd->prepare("SELECT titre, lien_drive, spotify_url FROM musiques WHERE id_album = ?");
-            $reqMusiques->execute([$albumId]);
+            // Requête pour récupérer les musiques de l'album 
+            $reqMusiques = $bdd->query("SELECT titre, lien_drive, spotify_url FROM musiques WHERE id_album = " . intval($idAlbum));
             $table = $reqMusiques->fetchAll(PDO::FETCH_ASSOC);
 
             $contenu = "<div class='song'>";
             $contenu .= "<div class='div-album'>";
-            $contenu .= "<a href='" . $albumInfo['spotify_url'] . "' class='link-album' target='_blank'>" . $albumInfo['nom'] . "</a>"; // htmlspecialchars pour éviter les injections XSS et garentir la sécurité et l'affichage correct
+            $contenu .= "<a href='" . $albumInfo['spotify_url'] . "' class='link-album' target='_blank'>" . $albumInfo['nom'] . "</a>";
             $contenu .= "</div>";
 
             if (!empty($table)) {
                 foreach ($table as $musique) {
-                    $audioSrc = convertDriveLink($musique['lien_drive']); //conversion du lien
+                    $audioSrc = convertirLienDrive($musique['lien_drive']); //conversion du lien
                     $contenu .= "
                     <div class='div-song'>
                         <span class='titre'>" . $musique['titre'] . "</span>
@@ -74,11 +71,30 @@ if ($liste == "albums") {
             $contenu = "<p>Erreur de connexion à la base de données</p>";
         }
     } else {
-        $contenu .= "<p>Sélectionnez un album pour voir ses titres.</p>";
+        $contenu = "<div class='song'>";
+        if (!empty($table)) {
+            foreach ($table as $musique) {
+                $contenu .= "
+                <div class='div-song'>
+                    <span class='titre'>" . $musique['titre'] . "</span>
+                    <audio controls>
+                        <source src='" . $musique['lien_drive'] . "' type='audio/mpeg'>
+                        Votre navigateur ne supporte pas l'audio.
+                    </audio>
+                    <a href='" . $musique['spotify_url'] . "' class='lien' target='_blank'>Écouter sur Spotify</a>
+                </div>";
+            }
+        } else {
+            $contenu .= "<p>Aucun titre trouvé</p>";
+        }
+        $contenu .= "</div>";
     }
 }
 
 
+
+
+//Le formulaire
 require "../Page/Formulaire/fonction_form.php";
 
 $resultat = "";
@@ -253,15 +269,14 @@ if (isset($_POST["clic"])) {
                         </div>
                         <div class="mb-3">
                             <label for="comm" class="form-label">Commentaire :</label>
-                            <textarea name="comm" id="comm" class="form-control">
-                            <?php
-                            if (isset($_POST["comm"]))
-                                echo $_POST["comm"];
-                            else
-                                echo "Votre commentaire..."; ?>
-                        </textarea>
+                            <textarea name="comm" id="comm" class="form-control" style="resize: none;"><?php
+                                                                                                        if (isset($_POST["comm"]))
+                                                                                                            echo $_POST["comm"];
+                                                                                                        else
+                                                                                                            echo "Votre commentaire..."; ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="clic" value="ok">Envoyer</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="clic" value="ok">Envoyer</button>
                 </form>
             </div>
             <?php
@@ -288,14 +303,17 @@ if (isset($_POST["clic"])) {
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous">
     </script>
+
     <script>
-        // Empêche la resoumission à l'actualisation
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 50) { // Se déclenche après 50px de scroll
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
     </script>
-    <!--<script src="../js/data.js"></script>
-    <script src="../js/script.js"></script>-->
 </body>
 
 </html>
