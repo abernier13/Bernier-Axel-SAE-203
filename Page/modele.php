@@ -13,7 +13,7 @@ function listeAlbums()
   try   // Connexion à la base de données
   {
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', 'root', $options);
+    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
   } catch (Exception $err) {
     die('Erreur connexion MySQL : ' . $err->getMessage());
   }
@@ -43,17 +43,19 @@ Retourne la liste des musiques d'un album spécifique
  *******************************************************/
 function listeMusiques($idAlbum)
 {
-  try   // Connexion à la base de données
-  {
+  try {
+    // Connexion à la base de données
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', 'root', $options);
+    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
   } catch (Exception $err) {
     die('Erreur connexion MySQL : ' . $err->getMessage());
   }
 
-  // Envoi de la requête SQL pour récupérer les musiques de l'album
-  $requete = $bdd->prepare("SELECT titre, lien_drive, spotify_url FROM musiques WHERE id_album = ?;");
-  $requete->execute(array($idAlbum));
+  // Sécurisation manuelle de l'identifiant pour éviter l'injection SQL
+  $idAlbum = intval($idAlbum);
+
+  // Envoi de la requête SQL sans requête préparée
+  $requete = $bdd->query("SELECT titre, lien_drive, spotify_url FROM musiques WHERE id_album = $idAlbum");
 
   // Lecture de toutes les lignes de la réponse dans un tableau associatif
   $musiques = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -63,7 +65,7 @@ function listeMusiques($idAlbum)
     $musique['lien_drive'] = convertirLienDrive($musique['lien_drive']);
   }
 
-  $bdd = null;                // Fin de la connexion
+  $bdd = null; // Fin de la connexion
 
   return $musiques;
 }
@@ -115,14 +117,13 @@ function toutesLesMusiques()
   try   // Connexion à la base de données
   {
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', 'root', $options);
+    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
   } catch (Exception $err) {
     die('Erreur connexion MySQL : ' . $err->getMessage());
   }
 
   // Envoi de la requête SQL pour récupérer toutes les musiques
   // utilisation d'alias pour simplifier la lecture et éviter les ambiguïtés
-  // INNER JOIN pour lier les musiques aux albums
   $reponse = $bdd->query("SELECT m.titre, m.lien_drive, m.spotify_url, a.nom AS album 
 FROM musiques m 
 INNER JOIN albums a ON m.id_album = a.id_album;");
