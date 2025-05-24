@@ -1,13 +1,106 @@
 body {
-    min-height: 100vh;
     margin: 0;
+    min-height: 150vh;
+    background-image: url(../img/gorillaz-xwau0n7ogqggnba5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
-    background-image: url(../../img/gorillaz-murdoc-2d-noodle.jpg);
-    background-position: top;
+
 }
 
+.backvideo {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: black;
+    transition: opacity 0.5s ease-out;
+    opacity: 1;
+}
+
+.logostart {
+    z-index: 4;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 50%;
+    cursor: pointer;
+    opacity: 1;
+    width: fit-content;
+    height: fit-content;
+}
+
+.logostart:hover {
+    transform: scale(1.1);
+    transition-duration: 0.3s;
+}
+
+
+#logstart {
+    opacity: 1;
+    display: block;
+    text-decoration: none;
+}
+
+#logstart img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* Conteneur de la vidéo pour qu'elle occupe tout l'écran */
+#player-container {
+    z-index: 3;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background: #000;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.2);
+}
+
+#player {
+    pointer-events: auto;
+}
+
+#player.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Fin de la partie vidéo */
+
+
+.backopacity {
+    position: relative;
+    z-index: 0;
+}
+
+.backopacity::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+
+
 /* Le header contenant les différents liens et le logo*/
+
 
 header {
     position: fixed;
@@ -74,20 +167,16 @@ header>div>a {
     border-radius: 10px;
 }
 
-.nav{
-    color: rgb(22, 22, 22);
-}
-
 .nav:hover {
-    background-color: rgb(22, 22, 22);
+    background-color: whitesmoke;
     transform: scale(1.2);
     transition-duration: 0.3s;
-    color: whitesmoke;
+    color: rgb(22, 22, 22);
     text-shadow: none;
 }
 
 .flexnav:hover svg path {
-    fill: whitesmoke;
+    fill: black;
     transition: fill 0.3s ease;
 }
 
@@ -163,6 +252,7 @@ header>div>a {
 
 
 
+
 /* Menu déroulant */
 .inscription {
     position: relative;
@@ -231,105 +321,239 @@ header>div>a {
 
 
 
-/*Le formulaire*/
-.flex {
-    min-height: 100vh;
+
+
+/* Partie contenant les membres du groupe et les informations sur eux*/
+main {
+    position: relative;
+    top: 200px;
+    min-height: 70vh;
     display: flex;
     justify-content: center;
+}
+
+main>h1 {
+    background-color: #e1536f;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px black;
+}
+
+.member-container {
+    display: flex;
     align-items: center;
     gap: 10px;
+    margin: 20px 0;
 }
 
-form {
-    position: relative;
-    background-color: rgb(80, 101, 241, 0.8);
-    padding: 30px;
+.arrow {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    color: white;
+}
+
+.member-card {
+    flex-grow: 1;
+}
+
+.member-card img {
+    width: 100%;
+    max-width: 300px;
     border-radius: 10px;
 }
 
-.btn.btn-primary {
-    background-color: rgb(223, 152, 90);
-    border-color: white;
-    color: black;
-}
-
-.btn.btn-primary:hover {
-    background-color: rgb(223, 152, 90, 0.9);
-
-}
-
-.resultat,
-.erreur {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 500px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.1em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    animation: fadeIn 0.5s ease-out;
+.member-tabs {
     display: flex;
-    align-items: center;
     justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.resultat {
-    bottom: 30px;
-    background-color: #4CAF50;
-    /* Vert pour succès */
+.member-tab {
+    padding: 8px 16px;
+    height: fit-content;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.member-tab.active {
+    background: #e1536f;
     color: white;
 }
 
-.erreur {
-    bottom: 30px;
-    background-color: #f44336;
-    /* Rouge pour erreur */
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.member-content {
+    transition: opacity 0.3s ease;
     color: white;
 }
 
-.resultat>span {
-    font-weight: 700;
-    color: #FFEB3B;
-    /* Jaune pour le pseudo */
-    margin: 0 5px;
+.member-content:not(.hidden) {
+    animation: fadeIn 0.3s ease;
 }
 
-/* Animation pour l'apparition des messages */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(20px);
     }
 
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
     }
 }
 
-/* Bouton de fermeture pour les messages */
-.close-message {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5em;
-    line-height: 1;
-    cursor: pointer;
-    transition: 0.3s;
-    background: none;
-    border: none;
-    padding: 0 5px;
+
+
+/* Partie contenant les covers d'albums */
+
+.containinfo {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    margin-top: 200px;
+    padding-top: 80px;
+    position: relative;
 }
 
-.close-message:hover {
-    color: black;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+.containinfo h3 {
+    position: absolute;
+    top: -10px;
+    background-color: #000;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 6px 6px rgba(0, 0, 0, 0.22);
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4c67b9, 0 0 20px #4c67b9;
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
 }
+
+@keyframes neon-glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4c67b9, 0 0 20px #4c67b9;
+    }
+
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4c67b9, 0 0 40px #4c67b9;
+    }
+}
+
+/* Animation au survol */
+.containinfo h3:hover {
+    text-shadow: 0 5px 15px rgba(76, 103, 185, 0.7);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .containinfo h3 {
+        font-size: 2rem;
+        top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containinfo h3 {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.contain {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    aspect-ratio: 1/1;
+    /* Garde un ratio carré */
+}
+
+.contain:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.contain img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.contain:hover img {
+    transform: scale(1.05);
+}
+
+/* Effet de superposition au survol */
+.contain::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(76, 103, 185, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contain:hover::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .info {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .containinfo {
+        padding: 1rem;
+    }
+}
+
+
+/*Le filtre*/
+.filtre {
+    position: relative;
+    right: 80px;
+}
+
+.info .contain {
+    display: none;
+}
+
+.info .contain.show {
+    display: block;
+}
+
+h4 {
+    color: #fff;
+}
+
 
 
 
@@ -361,8 +585,13 @@ footer::before {
 }
 
 @keyframes border-flow {
-    0% { background-position: 0 0; }
-    100% { background-position: 300% 0; }
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
 }
 
 .footer-content {
@@ -425,6 +654,15 @@ footer::before {
     padding-bottom: 10px;
 }
 
+.footer-links a::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #e1536f;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
 .footer-section h3::after {
     content: '';
     position: absolute;
@@ -453,15 +691,6 @@ footer::before {
     padding-left: 15px;
 }
 
-.footer-links a::before {
-    content: '>';
-    position: absolute;
-    left: 0;
-    color: #e1536f;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
 .footer-links a:hover {
     color: white;
     padding-left: 20px;
@@ -480,17 +709,14 @@ footer::before {
     color: #aaa;
 }
 
+
 /* Responsive */
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
     }
-    
+
     .footer-section {
         margin-bottom: 40px;
-    }
-    
-    .gorillaz-animation {
-        display: none;
     }
 }

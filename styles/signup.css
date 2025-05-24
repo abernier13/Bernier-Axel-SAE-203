@@ -2,15 +2,9 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-image: url(../img/4K-Gorillaz-Wallpaper-HD.jpg);
-    background-position: center;
-    background-size: 80%;
     color: white;
-}
-
-.backopacity {
-    min-height: 100vh;
-    background-color: rgba(14, 14, 14, 0.5);
+    background-image: url(../img/papers.co-ab05-wallpaper-gorillaz-boat-illust-music-36-3840x2400-4k-wallpaper.jpg);
+    background-position: top;
 }
 
 /* Le header contenant les différents liens et le logo*/
@@ -163,6 +157,7 @@ header>div>a {
 }
 
 
+
 /* Menu déroulant */
 .inscription {
     position: relative;
@@ -230,243 +225,148 @@ header>div>a {
 
 
 
-/* Partie contenant le selecteur entre albums et titres */
 
-.menu {
+/*Le formulaire*/
+.flex {
+    min-height: 100vh;
     display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 20px;
-    padding: 20px 0;
-    font-weight: 600;
-}
-
-.menu>a:hover {
-    color: rgb(80, 101, 241);
-    transition: background-color 0.3s;
-    text-decoration: underline;
-}
-
-
-
-
-
-/*Le filtre */
-.titre-filter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-#filtrage {
-    margin-left: 20px;
-}
-
-.filter-button {
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 14px;
-}
-
-.filter-button:focus {
-    border-color: #666;
-}
-
-
-
-
-
-/*Partie contenant les détails sur les albums*/
-.albums-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 120px 20px 20px;
-    margin-top: -90px;
     justify-content: center;
-}
-
-h3{
-    font-weight: 700;
-}
-
-.album-card {
-    background-color: rgba(15, 15, 15, 0.7);
-    border-radius: 15px;
-    padding: 20px;
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.album-card:hover {
-    transform: scale(1.05);
-}
-
-.album-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.bouton {
-    display: inline-block;
-    background-color: #4c67b9;
-    color: white;
-    padding: 8px 15px;
-    margin: 5px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.bouton:hover {
-    background-color: #3a4f8c;
-}
-
-
-
-
-
-
-/* Partie contenant les lecteurs audio */
-main {
-    min-height: 80vh;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    gap: 100px;
+    gap: 10px;
 }
 
-.main-flex {
-    background-color: rgb(16, 16, 16, 0.8);
+form {
+    position: relative;
+    background-color: rgb(80, 101, 241, 0.8);
     padding: 30px;
-    margin-top: 8%;
+    border-radius: 10px;
 }
 
-a {
-    text-decoration: none;
-    color: white;
+.btn.btn-primary {
+    background-color: rgb(223, 152, 90);
+    border-color: white;
+    color: black;
 }
 
-.song {
-    margin: 5%;
-    background-color: rgb(15, 15, 15, 0.5);
-    border-radius: 20px;
-    color: white;
-    width: 50%;
+.btn.btn-primary:hover {
+    background-color: rgb(223, 152, 90, 0.9);
+
 }
 
-.div-song {
+.resultat {
+    position: absolute;
+    left: 43%;
+    bottom: 25%;
+    background-color: #474141;
+    width: fit-content;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.resultat>span {
+    font-weight: 700;
+    color: rgb(231, 201, 29);
+}
+
+.resultat,
+.erreur {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.1em;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
     display: flex;
     align-items: center;
-    padding: 10px;
-    margin: 20px;
+    justify-content: center;
 }
 
-.div-album {
-    margin: 20px;
-    padding: 10px;
-    font-size: x-large;
-    width: fit-content;
-}
-
-.div-album:hover {
-    background-color: rgb(59, 5, 125);
-    border-radius: 10px;
-    transform: scale(1.3);
-    transition-duration: 0.3s;
-}
-
-.link-album {
-    text-decoration: none;
+.resultat {
+    bottom: 30px;
+    background-color: #4CAF50;
+    /* Vert pour succès */
     color: white;
-    padding: 20px;
-    margin: 20px;
 }
 
-
-.div-song {
-    padding: 10px;
-    width: fit-content;
-}
-
-.div-song>a:hover {
-    color: rgb(73, 250, 73);
-    background-color: rgba(85, 85, 85);
-}
-
-.lien {
-    text-decoration: none;
+.erreur {
+    bottom: 30px;
+    background-color: #f44336;
+    /* Rouge pour erreur */
     color: white;
-    padding: 10px;
-    margin: 10px;
 }
 
-.div-song:hover {
-    background-color: rgb(91, 34, 8);
-    border-radius: 10px;
-    transform: scale(1.3);
-    transition-duration: 0.3s;
+.resultat>span {
+    font-weight: 700;
+    color: #FFEB3B;
+    /* Jaune pour le pseudo */
+    margin: 0 5px;
 }
 
-.style {
-    margin: 20px;
-    padding: 10px;
-    font-size: larger;
-    color: rgb(80, 101, 241);
-}
-
-
-
-
-/* La section affichant les commentaires */
-.div-comm {
-    margin: 100px 0 100px 100px;
-    padding: 20px;
-    background-color: rgba(15, 15, 15, 0.7);
-    border-radius: 15px;
-    max-width: 600px;
-}
-
-.div-comm h4 {
-    color: whitesmoke;
-    font-weight: 600;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 10px;
-}
-
-.commentaire {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: rgba(80, 101, 241, 0.2);
-    border-radius: 10px;
-    border-left: 4px solid rgb(223, 152, 90);
-}
-
-.commentaire strong {
-    color: rgb(223, 152, 90);
-}
-
-.date-comm {
-    font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.6);
-    text-align: right;
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-    .div-comm {
-        margin: 20px 10px;
-        padding: 15px;
+/* Animation pour l'apparition des messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+
+/* Bouton de fermeture pour les messages */
+.message-croix{
+    position: absolute;
+    background-color: #424244;
+    left: 30.2rem;
+    bottom: 3rem;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 100%;
+}
+
+.croix { 
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.croix:hover {
+    transform: rotate(90deg);
+}
+
+.barre-diag1,
+.barre-diag2 {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 0;
+    transform-origin: center;
+    transition: all 0.3s ease;
+}
+
+.barre-diag1 {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.barre-diag2 {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.croix:hover .barre-diag1,
+.croix:hover .barre-diag2 {
+    background-color: #ff0000;
+    height: 4px;
 }
 
 
@@ -484,7 +384,6 @@ footer {
     box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 /* Effet de border top avec animation */
 footer::before {
     content: '';
@@ -499,8 +398,13 @@ footer::before {
 }
 
 @keyframes border-flow {
-    0% { background-position: 0 0; }
-    100% { background-position: 300% 0; }
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
 }
 
 .footer-content {
@@ -623,156 +527,12 @@ footer::before {
     .footer-content {
         flex-direction: column;
     }
-    
+
     .footer-section {
         margin-bottom: 40px;
     }
-}
 
-
-
-/*Le formulaire*/
-.flex{
-    display: flex;
-    justify-content: center;
-}
-form {
-    background-color: rgb(80, 101, 241, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-}
-
-.btn.btn-primary {
-    background-color: rgb(223, 152, 90);
-    border-color: white;
-    color: black;
-}
-
-.btn.btn-primary:hover {
-    background-color: rgb(223, 152, 90, 0.9);
-
-}
-
-
-.resultat,
-.erreur {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 500px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.1em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    animation: fadeIn 0.5s ease-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.resultat {
-    bottom: 30px;
-    background-color: #4CAF50;
-    /* Vert pour succès */
-    color: white;
-}
-
-.erreur {
-    bottom: 30px;
-    background-color: #f44336;
-    /* Rouge pour erreur */
-    color: white;
-}
-
-.resultat>span {
-    font-weight: 700;
-    color: #FFEB3B;
-    /* Jaune pour le pseudo */
-    margin: 0 5px;
-}
-
-/* Animation pour l'apparition des messages */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px);
+    .gorillaz-animation {
+        display: none;
     }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-
-
-/* Bouton de fermeture pour les messages */
-.close-message {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 1.5em;
-    line-height: 1;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.close-message:hover {
-    color: black;
-}
-
-.acceuil {
-    margin: 20px;
-    text-decoration: none;
-    font-size: larger;
-    color: rgb(255, 255, 255);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.acceuil:hover {
-    transform: scale(1.2);
-    transition-duration: 0.3s;
-    background-color: rgb(91, 34, 8);
-    text-decoration: underline;
-}
-
-.cerclesvg {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    right: 50%;
-    top: 150px;
-    margin: 15px;
-    padding: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid rgb(255, 255, 255);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.cerclesvg:hover {
-    background-color: rgb(91, 34, 8);
-    transform: scale(1.1);
-}
-
-.white-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.white-icon path {
-    stroke: white;
-}
-
-html {
-    scroll-behavior: smooth;
 }

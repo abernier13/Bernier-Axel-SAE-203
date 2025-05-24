@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
-    background-image: url(../../img/papers.co-ab05-wallpaper-gorillaz-boat-illust-music-36-3840x2400-4k-wallpaper.jpg);
+    background-image: url(../img/gorillaz-murdoc-2d-noodle.jpg);
     background-position: top;
 }
 
@@ -74,16 +74,20 @@ header>div>a {
     border-radius: 10px;
 }
 
+.nav{
+    color: rgb(22, 22, 22);
+}
+
 .nav:hover {
-    background-color: whitesmoke;
+    background-color: rgb(22, 22, 22);
     transform: scale(1.2);
     transition-duration: 0.3s;
-    color: rgb(22, 22, 22);
+    color: whitesmoke;
     text-shadow: none;
 }
 
 .flexnav:hover svg path {
-    fill: black;
+    fill: whitesmoke;
     transition: fill 0.3s ease;
 }
 
@@ -155,6 +159,7 @@ header>div>a {
         padding: 5px 10px;
     }
 }
+
 
 
 
@@ -253,21 +258,6 @@ form {
 
 }
 
-.resultat {
-    position: absolute;
-    left: 43%;
-    bottom: 25%;
-    background-color: #474141;
-    width: fit-content;
-    padding: 15px;
-    border-radius: 6px;
-}
-
-.resultat>span {
-    font-weight: 700;
-    color: rgb(231, 201, 29);
-}
-
 .resultat,
 .erreur {
     position: fixed;
@@ -321,21 +311,54 @@ form {
     }
 }
 
+
 /* Bouton de fermeture pour les messages */
-.close-message {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 1.5em;
-    line-height: 1;
-    cursor: pointer;
-    transition: 0.3s;
+.message-croix{
+    position: absolute;
+    background-color: #424244;
+    left: 30.2rem;
+    bottom: 3rem;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 100%;
 }
 
-.close-message:hover {
-    color: black;
+.croix { 
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
+
+.croix:hover {
+    transform: rotate(90deg);
+}
+
+.barre-diag1,
+.barre-diag2 {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 0;
+    transform-origin: center;
+    transition: all 0.3s ease;
+}
+
+.barre-diag1 {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.barre-diag2 {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.croix:hover .barre-diag1,
+.croix:hover .barre-diag2 {
+    background-color: #ff0000;
+    height: 4px;
+}
+
 
 
 

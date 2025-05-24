@@ -7,7 +7,18 @@ $titre = "";
 $contenu = "";
 
 // Déterminer ce qu'il faut afficher
-$liste = isset($_GET['liste']) ? $_GET['liste'] : 'albums';
+if (isset($_GET['liste'])) {
+    $liste = $_GET['liste'];
+} else {
+    $liste = 'albums';
+}
+
+// Gestion du tri (ASC par défaut, DESC si demandé)
+if (isset($_GET['abc'])) {
+    $abc = ($_GET['abc'] === 'desc') ? 'DESC' : 'ASC';
+} else {
+    $abc = 'ASC'; // Valeur par défaut
+}
 
 // Charger les données appropriées
 require_once "modele.php";
@@ -28,21 +39,48 @@ if ($liste == "albums") {
                 <p>Année: {$album['annee']}</p>
                 <p>Description: {$album['description']}</p>
                 <a href='{$album['spotify_url']}' class='bouton' target='_blank'>Écouter</a>
-                <a href='controleur.php?liste=musiques&album={$album['id_album']}' class='bouton'>Voir les titres</a>
+                <a href='controleur.php?liste=musiques&album={$album['id_album']}&abc=asc' class='bouton'>Voir les titres</a>
             </div>";
         }
     } else {
         $contenu .= "<p>Aucun album trouvé</p>";
     }
-    $contenu .= "</div>";
+    $contenu .= "</div>"; // fermeture de la div contenant les infos des albums
 } elseif ($liste == "musiques") {
     // AFFICHAGE DES MUSIQUES
     $titre = "<h3>Liste des titres</h3>";
+    $contenu = "<div class='tri-container'>";
+
+    // Récupérer l'ID de l'album s'il existe
+    $albumParam = "";
+    if (isset($_GET['album'])) {
+        $albumParam = "&album=" . intval($_GET['album']);
+    }
+
+    // Création du menu déroulant avec conservation de l'album
+    $contenu .= "<select id='tri-musiques' onchange='window.location.href=\"controleur.php?liste=musiques" . $albumParam . "&abc=\" + this.value'>";
+
+    // Option A-Z
+    $contenu .= "<option value='asc'";
+    if (strtoupper($abc) === 'ASC') {
+        $contenu .= " selected";
+    }
+    $contenu .= ">A-Z</option>";
+
+    // Option Z-A
+    $contenu .= "<option value='desc'";
+    if (strtoupper($abc) === 'DESC') {
+        $contenu .= " selected";
+    }
+    $contenu .= ">Z-A</option>";
+
+    // Fermeture du menu déroulant
+    $contenu .= "</select></div>";
 
     if (isset($_GET['album'])) {
         // Musiques d'un album spécifique
         $idAlbum = intval($_GET['album']);
-        $musiques = listeMusiques($idAlbum);
+        $musiques = listeMusiques($idAlbum, $abc);
         $albumInfo = null;
 
         // Récupérer les infos de l'album
@@ -54,7 +92,7 @@ if ($liste == "albums") {
             }
         }
 
-        $contenu = "<div class='song'>";
+        $contenu .= "<div class='song'>";
         if ($albumInfo) {
             $contenu .= "<div class='div-album'>";
             $contenu .= "<a href='" . $albumInfo['spotify_url'] . "' class='link-album' target='_blank'>" . $albumInfo['nom'] . "</a>";
@@ -76,11 +114,11 @@ if ($liste == "albums") {
         } else {
             $contenu .= "<p>Aucun titre trouvé pour cet album</p>";
         }
-        $contenu .= "</div>";
+        $contenu .= "</div>"; // fermeture de la div contenant les titres 
     } else {
         // Toutes les musiques
-        $musiques = toutesLesMusiques();
-        $contenu = "<div class='song'>";
+        $musiques = toutesLesMusiques($abc);
+        $contenu .= "<div class='song'>";
 
         if (!empty($musiques)) {
             foreach ($musiques as $musique) {
@@ -97,15 +135,14 @@ if ($liste == "albums") {
         } else {
             $contenu .= "<p>Aucun titre trouvé</p>";
         }
-        $contenu .= "</div>";
+        $contenu .= "</div>"; // fermeture de div-song
     }
 }
 
 
 
-
 //Le formulaire
-require "../Page/Formulaire/fonction_form.php";
+require "fonction_form.php";
 
 $resultat = "";
 $erreur = "";
@@ -151,8 +188,8 @@ if (isset($_POST["clic"])) {
 
     if (empty($erreur)) {
         // Nettoyage des entrées
-        $pseudo = addslashes(trim($pseudo));
-        $comm = addslashes(trim($comm));
+        $pseudo = $pseudo;
+        $comm = addslashes($comm);
         $id_album = intval($albums);
         $note = intval($note);
 
@@ -189,7 +226,7 @@ if (isset($_POST["clic"])) {
                       AND u.pseudo = '$pseudo'";
 
                     if (ecritureBDD($ajout_commentaire)) {
-                        $resultat = "<div class='resultat'>Merci pour votre note de $note/5 et votre commentaire sur $nom_album. <span>" . $pseudo . "</span> !</div>";
+                        $resultat = "Merci pour votre note de $note/5 et votre commentaire sur $nom_album. <span>" . $pseudo . "</span> !";
                         $pseudo = '';
                         $comm = '';
                         $albums = 0;
@@ -246,7 +283,7 @@ $affichage_comm .= "</div>";
     <title>Gorillaz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Page/page.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./styles/page.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -254,12 +291,12 @@ $affichage_comm .= "</div>";
 
         <header>
             <div class="gorillazlog">
-                <a href="../index.php">
-                    <img src="../img/gorillaz.logo_.white_.png" alt="Logo Gorillaz">
+                <a href="index.php">
+                    <img src="./img/gorillaz.logo_.white_.png" alt="Logo Gorillaz">
                 </a>
             </div>
             <div class="flexnav">
-                <a href="../Page/page.php" class="discographie nav">DISCOGRAPHIE</a>
+                <a href="page.php" class="discographie nav">DISCOGRAPHIE</a>
             </div>
             <div class="flexnav">
                 <a href="https://www.gorillaz.com/" target="_blank" class="a nav">SITE OFFICIEL</a>
@@ -275,7 +312,7 @@ $affichage_comm .= "</div>";
             </div>
 
             <div class="inscription">
-                <a href="../Page/signup.php" class="a-inscr">SIGN UP
+                <a href="signup.php" class="a-inscr">SIGN UP
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
                         stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
@@ -284,8 +321,8 @@ $affichage_comm .= "</div>";
                     </svg>
                 </a>
                 <div class="dropdown-content">
-                    <a href="../Page/Formulaire/signup.php">S'inscrir</a>
-                    <a href="../Page/Formulaire/connexion.php">Se connecter</a>
+                    <a href="signup.php">S'inscrir</a>
+                    <a href="connexion.php">Se connecter</a>
                 </div>
             </div>
         </header>
@@ -293,15 +330,7 @@ $affichage_comm .= "</div>";
 
         <main id="top">
             <div class="main-flex">
-                <div class="titre-filtre">
-                    <?= $titre ?>
-                    <div id="filtrage">
-                        <button class="btn active" onclick="filterSelection('all')">Montrer tout</button>
-                        <button class="btn" onclick="filterSelection('duree')">Par durée</button>
-                        <button class="btn" onclick="filterSelection('annee')">Par année</button>
-
-                    </div>
-                </div>
+                <?= $titre ?>
                 <!-- Menu de navigation -->
                 <div class="menu"><?= $menu ?></div>
 
@@ -330,16 +359,58 @@ $affichage_comm .= "</div>";
                     <div class="mb-3">
                         <label class="form-label">Note :</label>
                         <div class="note">
-                            <input type="radio" id="etoile1" name="note" value="1" <?= isset($_POST['note']) && $_POST['note'] == 1 ? 'checked' : '' ?>>
-                            <label for="star1" title="1 étoile">1</label>
-                            <input type="radio" id="etoile2" name="note" value="2" <?= isset($_POST['note']) && $_POST['note'] == 2 ? 'checked' : '' ?>>
-                            <label for="star2" title="2 étoiles">2</label>
-                            <input type="radio" id="etoile4" name="note" value="3" <?= isset($_POST['note']) && $_POST['note'] == 3 ? 'checked' : '' ?>>
-                            <label for="star3" title="3 étoiles">3</label>
-                            <input type="radio" id="etoile4" name="note" value="4" <?= isset($_POST['note']) && $_POST['note'] == 4 ? 'checked' : '' ?>>
-                            <label for="star4" title="4 étoiles">4</label>
-                            <input type="radio" id="etoile5" name="note" value="5" <?= isset($_POST['note']) && $_POST['note'] == 5 ? 'checked' : '' ?>>
-                            <label for="star5" title="5 étoiles">5</label>
+                            <?php
+                            // Vérifier si une note a été soumise via POST
+                            $noteSelectionnee = '';
+                            if (isset($_POST['note'])) {
+                                $noteSelectionnee = $_POST['note'];
+                            }
+                            ?>
+
+                            <!-- 1 étoile -->
+                            <input type="radio" id="etoile1" name="note" value="1"
+                                <?php
+                                if ($noteSelectionnee == '1') {
+                                    echo 'checked';
+                                }
+                                ?>>
+                            <label for="etoile1" title="1 étoile">1</label>
+
+                            <!-- 2 étoiles -->
+                            <input type="radio" id="etoile2" name="note" value="2"
+                                <?php
+                                if ($noteSelectionnee == '2') {
+                                    echo 'checked';
+                                }
+                                ?>>
+                            <label for="etoile2" title="2 étoiles">2</label>
+
+                            <!-- 3 étoiles -->
+                            <input type="radio" id="etoile3" name="note" value="3"
+                                <?php
+                                if ($noteSelectionnee == '3') {
+                                    echo 'checked';
+                                }
+                                ?>>
+                            <label for="etoile3" title="3 étoiles">3</label>
+
+                            <!-- 4 étoiles -->
+                            <input type="radio" id="etoile4" name="note" value="4"
+                                <?php
+                                if ($noteSelectionnee == '4') {
+                                    echo 'checked';
+                                }
+                                ?>>
+                            <label for="etoile4" title="4 étoiles">4</label>
+
+                            <!-- 5 étoiles -->
+                            <input type="radio" id="etoile5" name="note" value="5"
+                                <?php
+                                if ($noteSelectionnee == '5') {
+                                    echo 'checked';
+                                }
+                                ?>>
+                            <label for="etoile5" title="5 étoiles">5</label>
                         </div>
                         <div class="mb-3">
                             <label for="comm" class="form-label">Commentaire :</label>
@@ -353,13 +424,29 @@ $affichage_comm .= "</div>";
                     <button type="submit" class="btn btn-primary" name="clic" value="ok">Envoyer</button>
                 </form>
             </div>
+
             <?php
-            if (!empty($erreur)) {
-                echo "<div class='erreur'>$erreur</div>";
-            } elseif (!empty($resultat)) {
-                echo $resultat;
-            }
-            ?>
+            if (!empty($erreur)): ?>
+                <div class="erreur">
+                    <?= $erreur ?>
+                    <div class="message-croix" aria-label="Fermer" role="button">
+                        <div class="croix">
+                            <div class="barre-diag1"></div>
+                            <div class="barre-diag2"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php elseif (!empty($resultat)): ?>
+                <div class="resultat">
+                    <?= $resultat ?>
+                    <div class="message-croix" aria-label="Fermer" role="button">
+                        <div class="croix">
+                            <div class="barre-diag1"></div>
+                            <div class="barre-diag2"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
             <div class="cerclesvg">
                 <a href="#top">
@@ -375,8 +462,8 @@ $affichage_comm .= "</div>";
 
             <div class="footer-content">
                 <div class="footer-section about">
-                    <a href="./index.php">
-                        <img src="../img/gorillaz.logo_.white_.png" alt="Logo Gorillaz" class="footer-logo">
+                    <a href="index.php">
+                        <img src="./img/gorillaz.logo_.white_.png" alt="Logo Gorillaz" class="footer-logo">
                     </a>
                     <p>Gorillaz est un groupe virtuel britannique formé en 1998 par le musicien Damon Albarn et l'artiste Jamie Hewlett.</p>
                     <div class="footer-socials">
@@ -409,9 +496,9 @@ $affichage_comm .= "</div>";
                 <div class="footer-section links">
                     <h3>Liens Rapides</h3>
                     <ul class="footer-links">
-                        <li><a href="./Page/page.php">Discographie</a></li>
+                        <li><a href="page.php">Discographie</a></li>
                         <li><a href="https://www.gorillaz.com/" target="_blank">Site officiel</a></li>
-                        <li><a href="#galerie">Galerie</a></li>
+                        <li><a href="index.php">Galerie</a></li>
                         <li><a href="https://store.gorillaz.com/gb/" target="_blank">Boutique</a></li>
                     </ul>
                 </div>
@@ -438,6 +525,14 @@ $affichage_comm .= "</div>";
     </script>
 
     <script>
+        document.querySelectorAll('.message-croix').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.style.display = 'none';
+            });
+        });
+    </script>
+
+    <script>
         window.addEventListener("scroll", function() {
             const header = document.querySelector("header");
             if (window.scrollY > 50) { // Se déclenche après 50px de scroll
@@ -447,6 +542,4 @@ $affichage_comm .= "</div>";
             }
         });
     </script>
-</body>
-
-</html>
+</body

@@ -65,14 +65,14 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
             $nb_ecriture = ecritureBDD($requete);
 
             if ($nb_ecriture == 1) {
-                $resultat = "<div class='resultat'>Bienvenue <span>$pseudo</span>, vous êtes maintenant enregistré sur notre site.</div>";
+                $resultat = "Bienvenue <span>$pseudo</span>, vous êtes maintenant enregistré sur notre site.";
             } else {
                 $erreur .= "Échec lors de l'enregistrement de votre compte.";
             }
         }
     }
 } else
-    $resultat = "<div class='resultat'>Veuillez compléter le formulaire</div>";
+    $resultat = "Veuillez compléter le formulaire";
 
 //var_dump($_POST);
 ?>
@@ -87,18 +87,18 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
     <title>Gorillaz</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="signup.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./styles/signup.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <header>
         <div class="gorillazlog">
-            <a href="../../index.php">
-                <img src="../../img/gorillaz.logo_.white_.png" alt="Logo Gorillaz">
+            <a href="index.php">
+                <img src="./img/gorillaz.logo_.white_.png" alt="Logo Gorillaz">
             </a>
         </div>
         <div class="flexnav">
-            <a href="../../Page/page.php" class="discographie nav">DISCOGRAPHIE</a>
+            <a href="page.php" class="discographie nav">DISCOGRAPHIE</a>
         </div>
         <div class="flexnav">
             <a href="https://www.gorillaz.com/" target="_blank" class="a nav">SITE OFFICIEL</a>
@@ -116,7 +116,7 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
 
 
         <div class="inscription">
-            <a href="./Page/signup.php" class="a-inscr">SIGN UP
+            <a href="signup.php" class="a-inscr">SIGN UP
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
                     stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
@@ -125,8 +125,8 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
                 </svg>
             </a>
             <div class="dropdown-content">
-                <a href="./signup.php">S'inscrir</a>
-                <a href="./connexion.php">Se connecter</a>
+                <a href="signup.php">S'inscrir</a>
+                <a href="connexion.php">Se connecter</a>
             </div>
         </div>
     </header>
@@ -155,81 +155,106 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
         </form>
 
     </div>
-    <?php
-    if (empty($erreur))
-        echo $resultat;
-    else
-        echo "<div class='erreur'>$erreur</div>";
-    ?>
 
-<footer>
-    <!-- Effet d'animation en arrière-plan -->
-    <div class="gorillaz-animation"></div>
-    
-    <div class="footer-content">
-        <div class="footer-section about">
-            <a href="./index.php">
-                <img src="../../img/gorillaz.logo_.white_.png" alt="Logo Gorillaz" class="footer-logo">
-            </a>
-            <p>Gorillaz est un groupe virtuel britannique formé en 1998 par le musicien Damon Albarn et l'artiste Jamie Hewlett.</p>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/Gorillaz" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                </a>
-                <a href="https://twitter.com/gorillaz" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/gorillaz" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
-                <a href="https://www.youtube.com/gorillaz" target="_blank" class="social-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                    </svg>
-                </a>
+
+    <?php
+    if (!empty($erreur)): ?>
+        <div class="erreur">
+            <?= $erreur ?>
+            <div class="message-croix" aria-label="Fermer" role="button">
+                <div class="croix">
+                    <div class="barre-diag1"></div>
+                    <div class="barre-diag2"></div>
+                </div>
             </div>
         </div>
-        
-        <div class="footer-section links">
-            <h3>Liens Rapides</h3>
-            <ul class="footer-links">
-                <li><a href="./Page/page.php">Discographie</a></li>
-                <li><a href="https://www.gorillaz.com/" target="_blank">Site officiel</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="https://store.gorillaz.com/gb/" target="_blank">Boutique</a></li>
-            </ul>
+    <?php elseif (!empty($resultat)): ?>
+        <div class="resultat">
+            <?= $resultat ?>
+            <div class="message-croix" aria-label="Fermer" role="button">
+                <div class="croix">
+                    <div class="barre-diag1"></div>
+                    <div class="barre-diag2"></div>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer-section contact">
-            <h3>Contactez-nous</h3>
-            <ul class="footer-links">
-                <li><a href="mailto:contact8@gorillaz-fan.com" target="_blank">contact8@gorillaz-fan.com</a></li>
-                <li><a href="https://privacy.wmg.com/wmi/privacy" target="_blank">Politique de confidentialité</a></li>
-                <li><a href="https://privacy.wmg.com/wmi/terms-of-use" target="_blank">Conditions d'utilisation</a></li>
-            </ul>
+    <?php endif; ?>
+
+
+    <footer>
+        <!-- Effet d'animation en arrière-plan -->
+        <div class="gorillaz-animation"></div>
+
+        <div class="footer-content">
+            <div class="footer-section about">
+                <a href="index.php">
+                    <img src="./img/gorillaz.logo_.white_.png" alt="Logo Gorillaz" class="footer-logo">
+                </a>
+                <p>Gorillaz est un groupe virtuel britannique formé en 1998 par le musicien Damon Albarn et l'artiste Jamie Hewlett.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/Gorillaz" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/gorillaz" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/gorillaz" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/gorillaz" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Liens Rapides</h3>
+                <ul class="footer-links">
+                    <li><a href="page.php">Discographie</a></li>
+                    <li><a href="https://www.gorillaz.com/" target="_blank">Site officiel</a></li>
+                    <li><a href="index.php">Galerie</a></li>
+                    <li><a href="https://store.gorillaz.com/gb/" target="_blank">Boutique</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contactez-nous</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:contact8@gorillaz-fan.com" target="_blank">contact8@gorillaz-fan.com</a></li>
+                    <li><a href="https://privacy.wmg.com/wmi/privacy" target="_blank">Politique de confidentialité</a></li>
+                    <li><a href="https://privacy.wmg.com/wmi/terms-of-use" target="_blank">Conditions d'utilisation</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>&copy; 2025 Gorillaz Site Fan | Tous droits réservés</p>
-    </div>
-</footer>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Gorillaz Site Fan | Tous droits réservés</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous">
     </script>
 
-    <script src="../../js/form.js"></script>
+    <script>
+        document.querySelectorAll('.message-croix').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.style.display = 'none';
+            });
+        });
+    </script>
 
     <script>
         // Empêche la resoumission à l'actualisation

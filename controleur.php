@@ -5,6 +5,13 @@ require "modele.php";
 $liste = 'albums'; // Valeur par défaut définie à 'albums'
 $table = [];
 
+// Gestion du tri (ASC par défaut, DESC si demandé)
+if (isset($_GET['abc'])) {
+    $abc = ($_GET['abc'] === 'desc') ? 'DESC' : 'ASC';
+} else {
+    $abc = 'ASC'; // Valeur par défaut
+}
+
 // Chargement du modèle approprié
 if (!empty($_GET["liste"])) {
     $liste = $_GET["liste"];
@@ -18,7 +25,7 @@ if (!empty($_GET["liste"])) {
             $table = listeMusiques($idAlbum);
         } else {
             // Aucun album spécifié --> afficher toutes les musiques des deux albums
-            $table = toutesLesMusiques();
+            $table = toutesLesMusiques($abc);
         }
     }
 }
