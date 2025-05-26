@@ -149,6 +149,72 @@ header>div>a {
 
 
 
+/* Menu déroulant */
+.inscription {
+    position: relative;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(223, 152, 90);
+    text-shadow: none;
+    cursor: pointer;
+}
+
+.inscription>a {
+    text-decoration: none;
+    color: rgb(22, 22, 22);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inscription>.a-inscr:hover {
+    opacity: 0.8;
+    transition-duration: 0.3s;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #4c67b9;
+    min-width: 130px;
+    padding: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    text-decoration: none;
+    display: block;
+}
+
+.inscription:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.1s;
+}
+
+.dropdown-content a:hover {
+    background-color: #474141;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+
+
+
 
 
 /*Le formulaire*/
