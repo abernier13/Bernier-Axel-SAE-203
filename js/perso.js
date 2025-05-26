@@ -1,19 +1,19 @@
-// Liste des membres de Gorillaz avec leurs identifiants
+// Liste des membres de Gorillaz
 const membres = ['2d', 'murdoc', 'noodle', 'russel', 'damon'];
 let membreActuel = 0; // On commence par le premier membre (2-D)
 
 
 // Fonction pour afficher un membre spécifique
 function afficherMembre(index) {
-    // 1. Cacher tous les membres
+    // Cacher tous les membres
     document.querySelectorAll('.member-content').forEach(element => {
         element.classList.add('hidden');
     });
     
-    // 2. Afficher seulement le membre choisi
+    // Afficher seulement le membre choisi
     document.getElementById(membres[index]).classList.remove('hidden');
     
-    // 3. Mettre à jour les onglets
+    // Mettre à jour les onglets
     // Désactiver tous les onglets
     document.querySelectorAll('.member-tab').forEach(onglet => {
         onglet.classList.remove('active');
@@ -28,14 +28,14 @@ function afficherMembre(index) {
 
 // Flèche précédente
 document.getElementById('prev').addEventListener('click', function() {
-    // Calcul pour revenir en arrière (avec boucle si on dépasse)
+    // revenir d'un membre
     membreActuel = (membreActuel - 1 + membres.length) % membres.length;
     afficherMembre(membreActuel);
 });
 
 // Flèche suivante
 document.getElementById('next').addEventListener('click', function() {
-    // Avancer d'un membre (avec boucle si on dépasse)
+    // avancer d'un membre 
     membreActuel = (membreActuel + 1) % membres.length;
     afficherMembre(membreActuel);
 });

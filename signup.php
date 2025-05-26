@@ -182,9 +182,6 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
 
 
     <footer>
-        <!-- Effet d'animation en arrière-plan -->
-        <div class="gorillaz-animation"></div>
-
         <div class="footer-content">
             <div class="footer-section about">
                 <a href="index.php">
@@ -248,11 +245,22 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
         crossorigin="anonymous">
     </script>
 
-    <script>
+    <script> //animation bouton fermeture message formulaire
         document.querySelectorAll('.message-croix').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.parentElement.style.display = 'none';
             });
+        });
+    </script>
+
+<script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 50) { // Se déclenche après 50px de scroll
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
         });
     </script>
 
