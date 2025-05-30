@@ -12,7 +12,12 @@ function listeAlbums()
 {
   try {
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
+    $bdd = new PDO(
+      'mysql:host=localhost;dbname=gorillaz_song', 
+      'root', 
+      '', 
+      $options
+    );
   } catch (Exception $err) {
     die('Erreur connexion MySQL : ' . $err->getMessage());
   }
@@ -40,7 +45,12 @@ function listeMusiques($idAlbum, $abc = 'ASC')
 {
   try {
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
+    $bdd = new PDO(
+      'mysql:host=localhost;dbname=gorillaz_song', 
+      'root', 
+      '', 
+      $options
+    );
 
     if ($abc === 'DESC') {
       $abcValide = 'DESC';
@@ -65,6 +75,7 @@ function listeMusiques($idAlbum, $abc = 'ASC')
 }
 
 
+
 /*******************************************************
 Retourne la liste de toutes les musiques de tous les albums
   Entrée : 
@@ -77,7 +88,12 @@ function toutesLesMusiques($abc = 'ASC')
 {
   try {
     $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
-    $bdd = new PDO('mysql:host=localhost;dbname=gorillaz_song', 'root', '', $options);
+    $bdd = new PDO(
+      'mysql:host=localhost;dbname=gorillaz_song', 
+      'root', 
+      '', 
+      $options
+    );
 
     if ($abc === 'DESC') {
       $abcValide = 'DESC';

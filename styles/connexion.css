@@ -34,7 +34,6 @@ header.scrolled {
     /* Fond noir semi-transparent */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
-    /* Effet de flou (optionnel) */
 }
 
 /* Logo Gorillaz - Fixe à gauche */
@@ -44,9 +43,8 @@ header.scrolled {
     top: 80%;
     transform: translateY(-50%);
     width: 250px;
-    /* Taille réduite pour mobile */
     z-index: 10;
-    /* Au-dessus du header */
+    
 }
 
 .gorillazlog img {
@@ -57,15 +55,9 @@ header.scrolled {
 
 .gorillazlog:hover img {
     transform: scale(1.05);
-    /* Légère animation au survol */
 }
 
 /* Conteneur des liens de navigation */
-.nav-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
 
 header>div>a {
     text-decoration: none;
@@ -74,20 +66,16 @@ header>div>a {
     border-radius: 10px;
 }
 
-.nav{
-    color: rgb(22, 22, 22);
-}
-
 .nav:hover {
-    background-color: rgb(22, 22, 22);
+    background-color: whitesmoke;
     transform: scale(1.2);
     transition-duration: 0.3s;
-    color: whitesmoke;
+    color: rgb(22, 22, 22);
     text-shadow: none;
 }
 
 .flexnav:hover svg path {
-    fill: whitesmoke;
+    fill: black;
     transition: fill 0.3s ease;
 }
 
@@ -102,13 +90,6 @@ header>div>a {
     padding: 10px;
 }
 
-.centrer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
 /* Responsive */
 @media (max-width: 1024px) {
     header {
@@ -121,8 +102,10 @@ header>div>a {
         left: 15px;
     }
 
-    .nav-container {
-        gap: 10px;
+    .flex-nav>a {
+        width: min-content;
+        font-size: 20px;
+        gap: 5px;
     }
 }
 
@@ -151,14 +134,17 @@ header>div>a {
 
 @media (max-width: 480px) {
     .gorillazlog {
+        margin-top: -15px;
         width: 100px;
     }
 
     .inscription .a-inscr {
+        width: min-content;
         font-size: 14px;
         padding: 5px 10px;
     }
 }
+
 
 
 
@@ -225,7 +211,6 @@ header>div>a {
     border-radius: 5px;
     transition: background-color 0.2s;
 }
-
 
 
 

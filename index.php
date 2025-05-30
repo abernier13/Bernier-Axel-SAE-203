@@ -191,9 +191,6 @@
 
 
         <footer>
-            <!-- Effet d'animation en arrière-plan -->
-            <div class="gorillaz-animation"></div>
-
             <div class="footer-content">
                 <div class="footer-section about">
                     <a href="./index.php">

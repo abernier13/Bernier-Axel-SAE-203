@@ -12,16 +12,13 @@ if (isset($_GET['abc'])) {
     $abc = 'ASC'; // Valeur par défaut
 }
 
-// Chargement du modèle approprié
+// 
 if (!empty($_GET["liste"])) {
     $liste = $_GET["liste"];
 
     if ($liste == "musiques") {
-        if (isset($_GET['idAlbum'])) {
+        if (isset($_GET['idAlbum'])) {  // récupère les musiques de l'album spécifique
             $idAlbum = $_GET['idAlbum'];
-            $table = listeMusiques($idAlbum);
-        } else if (isset($_GET['album'])) {  // Correction: utiliser 'album' comme dans page.php
-            $idAlbum = $_GET['album'];
             $table = listeMusiques($idAlbum);
         } else {
             // Aucun album spécifié --> afficher toutes les musiques des deux albums
@@ -30,7 +27,7 @@ if (!empty($_GET["liste"])) {
     }
 }
 
-// Par défaut, on charge les albums si $liste est vide ou égale à 'albums'
+// Par défaut, on charge les albums si $liste est vide ou égale à albums
 if ($liste == 'albums') {
     $table = listeAlbums();
 }

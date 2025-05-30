@@ -15,10 +15,16 @@ if (isset($_GET['liste'])) {
 
 // Gestion du tri (ASC par défaut, DESC si demandé)
 if (isset($_GET['abc'])) {
-    $abc = ($_GET['abc'] === 'desc') ? 'DESC' : 'ASC';
+    if ($_GET['abc'] === 'desc') {
+        $abc = 'DESC';
+    } else {
+        $abc = 'ASC';
+    }
 } else {
-    $abc = 'ASC'; // Valeur par défaut
+    // Si la variable 'abc' n'est pas définie dans l'URL, on utilise la valeur par défaut 'ASC'
+    $abc = 'ASC';
 }
+
 
 // Charger les données appropriées
 require_once "modele.php";
@@ -88,7 +94,6 @@ if ($liste == "albums") {
         foreach ($tousAlbums as $album) {
             if ($album['id_album'] == $idAlbum) {
                 $albumInfo = $album;
-                break;
             }
         }
 
@@ -252,7 +257,7 @@ $requete_comm = "SELECT u.pseudo, a.note, a.commentaire, a.date_publication, alb
 
 $commentaires = lectureBDD($requete_comm);
 
-// Stocke tout le HTML dans une variable
+
 $affichage_comm = "<div class='div-comm'>";
 $affichage_comm .= "<h4>Derniers commentaires</h4>";
 
@@ -334,7 +339,7 @@ $affichage_comm .= "</div>";
                 <!-- Menu de navigation -->
                 <div class="menu"><?= $menu ?></div>
 
-                <?= $contenu ?>
+                <?= $contenu ?><!--Affichage des titres dans le lecteur audio (fonctionne le mieux avec Mozilla)-->
             </div>
             <?= $affichage_comm ?>
         </main>
@@ -457,8 +462,8 @@ $affichage_comm .= "</div>";
                     </svg>
                 </a>
             </div>
-            <!-- Effet d'animation en arrière-plan -->
-            <div class="gorillaz-animation"></div>
+
+
 
             <div class="footer-content">
                 <div class="footer-section about">
@@ -525,6 +530,14 @@ $affichage_comm .= "</div>";
     </script>
 
     <script>
+        // Empêche la resoumission à l'actualisation
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+
+    <script>
+        //animation bouton fermeture message formulaire
         document.querySelectorAll('.message-croix').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.parentElement.style.display = 'none';
