@@ -7,7 +7,7 @@ function connexionBDD()
     $bdd = new PDO(
       'mysql:host=localhost;dbname=gorillaz_song', 
       'root', 
-      '', 
+      'root', 
       $options
     );
   } catch (Exception $err) {

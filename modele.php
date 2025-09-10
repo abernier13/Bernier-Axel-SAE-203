@@ -15,7 +15,7 @@ function listeAlbums()
     $bdd = new PDO(
       'mysql:host=localhost;dbname=gorillaz_song', 
       'root', 
-      '', 
+      'root', 
       $options
     );
   } catch (Exception $err) {
@@ -48,7 +48,7 @@ function listeMusiques($idAlbum, $abc = 'ASC')
     $bdd = new PDO(
       'mysql:host=localhost;dbname=gorillaz_song', 
       'root', 
-      '', 
+      'root', 
       $options
     );
 
@@ -91,7 +91,7 @@ function toutesLesMusiques($abc = 'ASC')
     $bdd = new PDO(
       'mysql:host=localhost;dbname=gorillaz_song', 
       'root', 
-      '', 
+      'root', 
       $options
     );
 
