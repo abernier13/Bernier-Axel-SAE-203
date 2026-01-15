@@ -122,7 +122,7 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
             <button type="submit" class="btn btn-primary" name="clic" value="ok">Se connecter</button>
         </form>
     </div>
-    
+
     <?php
     if (!empty($erreur)): ?>
         <div class="erreur">
@@ -216,7 +216,8 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
         crossorigin="anonymous">
     </script>
 
-    <script> //animation bouton fermeture message formulaire
+    <script>
+        //animation bouton fermeture message formulaire
         document.querySelectorAll('.message-croix').forEach(btn => {
             btn.addEventListener('click', function() {
                 this.parentElement.style.display = 'none';
@@ -224,7 +225,7 @@ if (isset($_POST["clic"]))    // Si le formulaire a été validé
         });
     </script>
 
-<script>
+    <script>
         window.addEventListener("scroll", function() {
             const header = document.querySelector("header");
             if (window.scrollY > 50) { // Se déclenche après 50px de scroll
